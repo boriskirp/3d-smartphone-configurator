@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Smartphone Pro: Fixed & Mobile Ready</title>
+    <title>3D Smartphone Configurator</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
     <style>
         body { margin: 0; background: #000; overflow: hidden; font-family: sans-serif; touch-action: none; }
-        #ui { position: absolute; top: 20px; left: 20px; z-index: 100; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 12px; color: white; border: 1px solid #444; width: 180px; pointer-events: auto; }
-        input { width: 100%; cursor: pointer; margin: 10px 0; }
-        label { font-size: 10px; color: #888; text-transform: uppercase; }
-        .donate-btn { display: block; background: #f0c419; color: #000; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 12px; transition: 0.3s; margin-top: 10px; }
-        .donate-btn:hover { background: #ffdd00; transform: scale(1.02); }
+        #ui { position: absolute; top: 10px; left: 10px; z-index: 100; background: rgba(0,0,0,0.8); padding: 12px; border-radius: 12px; color: white; border: 1px solid #444; width: 160px; pointer-events: auto; }
+        input { width: 100%; cursor: pointer; margin: 8px 0; }
+        label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .donate-btn { display: block; background: #f0c419; color: #000; text-align: center; padding: 8px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 11px; transition: 0.3s; margin-top: 10px; }
+        
+        /* Адаптація UI для маленьких екранів */
+        @media (max-width: 480px) {
+            #ui { width: 130px; padding: 10px; top: 5px; left: 5px; }
+            label { font-size: 9px; }
+        }
     </style>
 </head>
 <body>
@@ -23,11 +28,8 @@
     <label>Прозорість</label>
     <input type="range" id="alpha" min="0.1" max="1" step="0.1" value="1">
 
-    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;">
-        <p style="font-size: 11px; color: #888; margin: 0 0 10px 0;">Подобається проект?</p>
-        <a href="https://www.buymeacoffee.com/ТУТ_ТВОЄ_ПОСИЛАННЯ" target="_blank" class="donate-btn">
-            ☕ Підтримати автора
-        </a>
+    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #333;">
+        <a href="https://www.buymeacoffee.com/" target="_blank" class="donate-btn">☕ Підтримати</a>
     </div>
 </div>
 
@@ -36,7 +38,7 @@
 <script>
     let scene, camera, renderer, phone, isDragging = false;
     let prevMouse = { x: 0, y: 0 };
-    let phoneBody; // Окреме посилання на меш корпусу для швидкого оновлення
+    let phoneBody;
 
     init();
     animate();
@@ -48,7 +50,6 @@
         camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.set(0, 0, 5.5);
 
-        // Оптимізація рендерера
         renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -65,25 +66,33 @@
         buildPhone();
 
         // Події миші
-        document.addEventListener('mousedown', () => isDragging = true);
+        document.addEventListener('mousedown', (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
         document.addEventListener('mouseup', () => isDragging = false);
-        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mousemove', (e) => handleMove(e));
 
-        // Події тачскріна (для смартфонів)
+        // Події тачскріна (ВИПРАВЛЕНО)
         document.addEventListener('touchstart', (e) => {
             isDragging = true;
             prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         }, { passive: false });
+
         document.addEventListener('touchend', () => isDragging = false);
+
         document.addEventListener('touchmove', (e) => {
-            handleMove(e.touches[0]);
+            if (isDragging) {
+                if (e.cancelable) e.preventDefault(); // Блокуємо скрол сторінки
+                handleMove(e.touches[0]);
+            }
         }, { passive: false });
     }
 
     function handleMove(e) {
         if(isDragging && phone) {
-            phone.rotation.y += (e.clientX - prevMouse.x) * 0.01;
-            phone.rotation.x += (e.clientY - prevMouse.y) * 0.01;
+            const deltaX = e.clientX - prevMouse.x;
+            const deltaY = e.clientY - prevMouse.y;
+            
+            phone.rotation.y += deltaX * 0.007;
+            phone.rotation.x += deltaY * 0.007;
         }
         prevMouse = { x: e.clientX, y: e.clientY };
     }
@@ -100,7 +109,6 @@
 
     function buildPhone() {
         phone = new THREE.Group();
-
         const col = document.getElementById('color').value;
         const op = parseFloat(document.getElementById('alpha').value);
         const thick = 0.05, w = 1.1, h = 2.2, r = 0.18;
@@ -113,58 +121,23 @@
         phoneBody.position.z = -thick/2;
         phone.add(phoneBody);
 
-        // Створення екрану (один раз)
+        // Екран
         const canvas = document.createElement('canvas');
         canvas.width = 512; canvas.height = 1024;
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(0, 0, 512, 1024);
-        ctx.fillStyle = '#00ff88';
-        ctx.font = 'bold 90px Arial'; 
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('LOGIN', 256, 512);
+        ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 512, 1024);
+        ctx.fillStyle = '#00ff88'; ctx.font = 'bold 80px Arial'; ctx.textAlign = 'center';
+        ctx.fillText('SMART VIBE', 256, 512);
 
         const screenTex = new THREE.CanvasTexture(canvas);
-        const screenMat = new THREE.MeshPhongMaterial({ map: screenTex, shininess: 150, emissive: '#00ff88', emissiveIntensity: 0.3 });
-        
+        const screenMat = new THREE.MeshPhongMaterial({ map: screenTex, emissive: '#00ff88', emissiveIntensity: 0.2 });
         const screen = new THREE.Mesh(new THREE.PlaneGeometry(w - 0.08, h - 0.08), screenMat);
         screen.position.z = (thick/2) + 0.012; 
         phone.add(screen);
 
-        // Деталі (динаміки, порти, камери)
-        const blackMat = new THREE.MeshBasicMaterial({color: 0x000000});
-        const port = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.015, 0.04), blackMat);
-        port.position.set(0, -h/2 - 0.01, 0);
-        phone.add(port);
-
-        for(let i = -3; i <= 3; i++) {
-            if(i === 0) continue;
-            const hole = new THREE.Mesh(new THREE.CircleGeometry(0.015, 8), blackMat);
-            hole.position.set(i * 0.06 + (i > 0 ? 0.12 : -0.12), -h/2 - 0.01, thick/2);
-            hole.rotation.x = Math.PI / 2;
-            phone.add(hole);
-        }
-
-        const pwr = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.18, 0.04), blackMat);
-        pwr.position.set(w/2 + 0.01, 0.4, 0);
-        phone.add(pwr);
-
-        const camBox = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.42, 0.04), blackMat);
-        camBox.position.set(-0.25, 0.8, -thick/2 - 0.02);
-        phone.add(camBox);
-
-        for(let i=0; i<4; i++) {
-            const lens = new THREE.Mesh(new THREE.CircleGeometry(0.075, 16), new THREE.MeshPhongMaterial({color: 0x080808, shininess: 200}));
-            lens.position.set((i%2?-0.15:-0.35), (i<2?0.9:0.7), -thick/2 - 0.045);
-            lens.rotation.y = Math.PI;
-            phone.add(lens);
-        }
-
         scene.add(phone);
     }
 
-    // ГОЛОВНА ОПТИМІЗАЦІЯ: Зміна властивостей без перестворення об'єктів
     document.getElementById('color').oninput = (e) => {
         if (phoneBody) phoneBody.material.color.set(e.target.value);
     };
@@ -176,8 +149,8 @@
     function animate() {
         requestAnimationFrame(animate);
         if (phone && !isDragging) {
-            phone.rotation.y += 0.004;
-            phone.position.y = Math.sin(Date.now() * 0.0015) * 0.05;
+            phone.rotation.y += 0.005;
+            phone.position.y = Math.sin(Date.now() * 0.001) * 0.03;
         }
         renderer.render(scene, camera);
     }
