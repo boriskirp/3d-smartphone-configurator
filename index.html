@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>3D Smartphone Configurator</title>
+    <title>3D Smartphone Configurator PRO</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
     <style>
         body { margin: 0; background: #000; overflow: hidden; font-family: sans-serif; touch-action: none; }
@@ -12,7 +12,6 @@
         label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
         .donate-btn { display: block; background: #f0c419; color: #000; text-align: center; padding: 8px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 11px; transition: 0.3s; margin-top: 10px; }
         
-        /* Адаптація UI для маленьких екранів */
         @media (max-width: 480px) {
             #ui { width: 130px; padding: 10px; top: 5px; left: 5px; }
             label { font-size: 9px; }
@@ -47,11 +46,9 @@
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x050505);
 
+        const isMobile = window.innerWidth < 480;
         camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
-        // Замість фіксованого camera.position.set(0, 0, 5.5);
-const isMobile = window.innerWidth < 480;
-camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = isMobile ? 7.5 : 5.5; // На мобільних камера далі
+        camera.position.z = isMobile ? 7.5 : 5.5;
 
         renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
@@ -68,22 +65,20 @@ camera.position.z = isMobile ? 7.5 : 5.5; // На мобільних камер�
 
         buildPhone();
 
-        // Події миші
+        // Mouse events
         document.addEventListener('mousedown', (e) => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
         document.addEventListener('mouseup', () => isDragging = false);
-        document.addEventListener('mousemove', (e) => handleMove(e));
+        document.addEventListener('mousemove', handleMove);
 
-        // Події тачскріна (ВИПРАВЛЕНО)
+        // Touch events
         document.addEventListener('touchstart', (e) => {
             isDragging = true;
             prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         }, { passive: false });
-
         document.addEventListener('touchend', () => isDragging = false);
-
         document.addEventListener('touchmove', (e) => {
             if (isDragging) {
-                if (e.cancelable) e.preventDefault(); // Блокуємо скрол сторінки
+                if (e.cancelable) e.preventDefault();
                 handleMove(e.touches[0]);
             }
         }, { passive: false });
@@ -93,7 +88,6 @@ camera.position.z = isMobile ? 7.5 : 5.5; // На мобільних камер�
         if(isDragging && phone) {
             const deltaX = e.clientX - prevMouse.x;
             const deltaY = e.clientY - prevMouse.y;
-            
             phone.rotation.y += deltaX * 0.007;
             phone.rotation.x += deltaY * 0.007;
         }
@@ -116,10 +110,10 @@ camera.position.z = isMobile ? 7.5 : 5.5; // На мобільних камер�
         const op = parseFloat(document.getElementById('alpha').value);
         const thick = 0.05, w = 1.1, h = 2.2, r = 0.18;
 
+        // Корпус
         const shape = createRoundedShape(w, h, r);
         const bodyGeom = new THREE.ExtrudeGeometry(shape, { depth: thick, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01 });
         const bodyMat = new THREE.MeshStandardMaterial({ color: col, metalness: 0.9, roughness: 0.1, transparent: true, opacity: op });
-        
         phoneBody = new THREE.Mesh(bodyGeom, bodyMat);
         phoneBody.position.z = -thick/2;
         phone.add(phoneBody);
@@ -130,13 +124,38 @@ camera.position.z = isMobile ? 7.5 : 5.5; // На мобільних камер�
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 512, 1024);
         ctx.fillStyle = '#00ff88'; ctx.font = 'bold 80px Arial'; ctx.textAlign = 'center';
-        ctx.fillText('SMART VIBE', 256, 512);
+        ctx.fillText('LOGIN', 256, 512);
 
         const screenTex = new THREE.CanvasTexture(canvas);
         const screenMat = new THREE.MeshPhongMaterial({ map: screenTex, emissive: '#00ff88', emissiveIntensity: 0.2 });
         const screen = new THREE.Mesh(new THREE.PlaneGeometry(w - 0.08, h - 0.08), screenMat);
         screen.position.z = (thick/2) + 0.012; 
         phone.add(screen);
+
+        // ДЕТАЛІ (Повертаємо кнопки, камери та порт)
+        const blackMat = new THREE.MeshBasicMaterial({color: 0x000000});
+        
+        // Порт зарядки
+        const port = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.015, 0.04), blackMat);
+        port.position.set(0, -h/2 - 0.01, 0);
+        phone.add(port);
+
+        // Кнопка живлення
+        const pwr = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.18, 0.04), blackMat);
+        pwr.position.set(w/2 + 0.01, 0.4, 0);
+        phone.add(pwr);
+
+        // Блок камер
+        const camBox = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.42, 0.04), blackMat);
+        camBox.position.set(-0.25, 0.8, -thick/2 - 0.02);
+        phone.add(camBox);
+
+        for(let i=0; i<4; i++) {
+            const lens = new THREE.Mesh(new THREE.CircleGeometry(0.075, 16), new THREE.MeshPhongMaterial({color: 0x080808, shininess: 200}));
+            lens.position.set((i%2?-0.15:-0.35), (i<2?0.9:0.7), -thick/2 - 0.045);
+            lens.rotation.y = Math.PI;
+            phone.add(lens);
+        }
 
         scene.add(phone);
     }
@@ -158,17 +177,14 @@ camera.position.z = isMobile ? 7.5 : 5.5; // На мобільних камер�
         renderer.render(scene, camera);
     }
 
-   window.onresize = () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    
-    camera.aspect = width / height;
-    // Коригуємо дистанцію при зміні орієнтації екрана
-    camera.position.z = width < 480 ? 7.5 : 5.5;
-    
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-};
+    window.onresize = () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.position.z = width < 480 ? 7.5 : 5.5;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+    };
 </script>
 </body>
 </html>
