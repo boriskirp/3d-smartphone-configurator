@@ -20,9 +20,16 @@
 
 ### 📬 Зв'язок та співпраця
 Якщо вам цікава інтеграція кастомного 3D-рішення:
-* **Email:** <a href="mailto:mr.karalyp@gmail.com?subject=Обговорення%203D%20віджета" style="background: #ff5a19; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 5px;">✉️ Написати автору</a>
-* **LinkedIn:** [Ваш профіль]
+## 🚀 Як отримати власне 3D-рішення?
 
+Все, що ви бачите в демо — колір, логотип, оточення та фізика — може бути адаптовано під ваш продукт.
+
+### Порядок дій:
+1.  **Протестуйте Demo:** Відкрийте [3D Smartphone Configurator](https://boriskirp.github.io/3d-smartphone-configurator/) на вашому смартфоні.
+2.  **Надішліть запит:** У меню налаштувань (зміна кольору/лого) натисніть **"Написати автору"**.
+3.  **Обговорення:** У вкладці пошти, що відкриється, коротко опишіть ваші побажання щодо 3D-моделі чи середовища.
+
+**Я допоможу перетворити вашу ідею на інтерактивний досвід, який працює прямо в браузері.**
 ---
 
 ## 🇺🇸 About the Project
@@ -46,5 +53,13 @@ Elevate your product presentation with tailored 3D experiences:
 
 ### 📬 Contact & Collaboration
 Interested in a custom 3D solution for your business?
-* **Email:** <a href="mailto:mr.karalyp@gmail.com?subject=Custom%203D%20Widget%20Inquiry" style="background: #ff5a19; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 5px;">✉️ Get a Quote</a>
-* **LinkedIn:** [Your LinkedIn Profile]
+## 🚀 How to get your own 3D solution?
+
+Everything you see in the demo — color, logo, environment and physics — can be adapted to your product.
+
+### Steps:
+1. **Test the Demo:** Open [3D Smartphone Configurator](https://boriskirp.github.io/3d-smartphone-configurator/) on your smartphone.
+2. **Send a request:** In the settings menu (color/logo change), click **"Write to the author"**.
+3. **Discussion:** In the mail tab that opens, briefly describe your wishes for the 3D model or environment.
+
+**I will help turn your idea into an interactive experience that works right in the browser.**
