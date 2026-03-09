@@ -60,7 +60,7 @@ Advanced Features: Interactive animations and unique environments.
 2. Terms of Use
 License: Custom builds include a license for use on your specific domains/platforms. Redistribution or resale to third parties is prohibited.
 ### ⚡ Докази швидкості / Performance Proof
-![Desktop Performance](./assets/PageSpeed%20Insights1.png)
+![Desktop Performance]([./assets/PageSpeed%20Insights1.png](https://github.com/boriskirp/3d-smartphone-configurator/blob/main/PageSpeed%20Insights1.png))
 *Результат тестування десктопної версії (99/100)*
 
 ![Mobile Performance]([./assets/PageSpeed%20Insights2.png](https://github.com/boriskirp/3d-smartphone-configurator/blob/main/PageSpeed%20Insights2.png))
