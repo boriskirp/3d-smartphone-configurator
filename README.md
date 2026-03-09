@@ -63,7 +63,7 @@ License: Custom builds include a license for use on your specific domains/platfo
 ![Desktop Performance](./assets/PageSpeed%20Insights1.png)
 *Результат тестування десктопної версії (99/100)*
 
-![Mobile Performance](./assets/PageSpeed%20Insights2.png)
+![Mobile Performance]([./assets/PageSpeed%20Insights2.png](https://github.com/boriskirp/3d-smartphone-configurator/blob/main/PageSpeed%20Insights2.png))
 *Результат тестування мобільної версії (70/100)*
 
 Direct Cooperation: No complex platforms or third-party verifications required for the initial stage.
