@@ -1,65 +1,68 @@
-# 📱 3D Smartphone Configurator PRO
-
+📱 3D Smartphone Configurator PRO
 [English version below]
 
-## 🇺🇦 Про проект
-Високопродуктивний 3D-віджет для e-commerce та цифрового досвіду (DX), побудований на **Three.js**. Розроблений з урахуванням стратегій **Total Experience 2026**.
+🇺🇦 Про проект
+Це високопродуктивний 3D-віджет, розроблений для демонстрації того, як сучасні технології (Three.js) можуть підвищувати конверсію в e-commerce без втрати швидкості сайту.
 
-### 🌟 Ключові можливості:
-* **Кастомізація в реальному часі:** Миттєва зміна кольору корпусу та прозорості.
-* **Адаптивність:** Повна підтримка тач-жестів для смартфонів та планшетів.
-* **Clean UI:** Контекстне меню, яке можна приховати для повного огляду моделі.
+⚡ Технічна перевага (Google PageSpeed Insights)
+На відміну від важких конкурентів, це рішення має Green Score:
 
-### 💎 Персоналізація під ваш бренд (Commercial)
-Ви можете замовити адаптацію цього рішення для вашого бізнесу:
-* **Вбудвання на сайт:** 3д-середовища з 3д-моделлю.
-* **Ваша 3D-модель:** Заміна смартфона на будь-який ваш продукт (годинник, пакування, гаджет).
-* **Брендування:** Налаштування фірмових кольорів, текстур та логотипів.
-* **Складна фізика:** Анімація розбору моделі (Explode view) або внутрішня механіка.
-* **Швидка оплата:** Інтеграція **Apple Pay / Google Pay** через інвойси WayForPay для миттєвих продажів.
+99/100 — Desktop.
 
-### 📬 Зв'язок та співпраця
-Якщо вам цікава інтеграція кастомного 3D-рішення:
-## 🚀 Як отримати власне 3D-рішення?
+70/100 — Mobile (найкращий показник для 3D).
 
-Все, що ви бачите в демо — колір, логотип, оточення та фізика — може бути адаптовано під ваш продукт.
+Миттєвий відгук на зміну кольорів та прозорості.
 
-### Порядок дій:
-1.  **Протестуйте Demo:** Відкрийте [3D Smartphone Configurator](https://boriskirp.github.io/3d-smartphone-configurator/) на вашому смартфоні.
-2.  **Надішліть запит:** У меню налаштувань (зміна кольору/лого) натисніть **"Написати автору"**.
-3.  **Обговорення:** У вкладці пошти, що відкриється, коротко опишіть ваші побажання щодо 3D-моделі чи середовища.
+💎 Бізнес-модель: Персоналізація та Ліцензія
+Проект розповсюджується за моделлю "Try before you buy". Ви можете безкоштовно протестувати демо-версію. Для комерційного використання та адаптації під ваш продукт діють наступні умови:
 
-**Я допоможу перетворити вашу ідею на інтерактивний досвід, який працює прямо в браузері.**
----
+1. Персоналізація (Custom Setup)
+Я допоможу адаптувати цей віджет під ваші потреби:
 
-## 🇺🇸 About the Project
-A high-performance, context-aware 3D widget for e-commerce and digital experience (DX). Designed with a focus on **Total Experience 2026** strategies using **Three.js**.
+Заміна моделі: Смартфон замінюється на ваш товар (годинник, меблі, прикраси тощо).
 
-### 🌟 Key Features:
-* **Real-time Customization:** Instant color and transparency (X-ray mode) updates.
-* **Mobile Ready:** Full support for touch gestures and responsive layouts.
-* **Professional Rendering:** Studio lighting and optimized WebGL performance.
+Брендування: Встановлення ваших логотипів, фірмових кольорів та фону.
 
-### 🚀 Custom Solutions for Business
-Elevate your product presentation with tailored 3D experiences:
-* **Embedding on the website:** 3D environments with a 3D model.
-* **Your 3D Model:** Swap the smartphone for any product (watch, packaging, etc.).
-* **Brand Identity:** Custom textures, HDRI environments, and logo placement.
-* **Advanced Physics:** Interactive animations and exploded views.
-* **Seamless Payments:** Integrated **Apple Pay & Google Pay** support via WayForPay invoices.
+Функціонал: Додавання унікальних кнопок, анімацій розбору чи перемикачів.
 
-### 🚀 Live Demo
-**[View Live Demo on GitHub Pages](https://boriskirp.github.io/3d-smartphone-configurator/)**
+2. Ліцензування та Оплата
+Ліцензія: При замовленні персоналізації ви отримуєте право на комерційне використання коду на вашому ресурсі без права перепродажу третім особам.
 
-### 📬 Contact & Collaboration
-Interested in a custom 3D solution for your business?
-## 🚀 How to get your own 3D solution?
+Передплата: Робота над кастомним рішенням починається після часткової передплати.
 
-Everything you see in the demo — color, logo, environment and physics — can be adapted to your product.
+Проста оплата: Оплата здійснюється напряму (через інвойс або переказ), що дозволяє вам отримати готовий продукт без складних реєстрацій на посередницьких платформах.
 
-### Steps:
-1. **Test the Demo:** Open [3D Smartphone Configurator](https://boriskirp.github.io/3d-smartphone-configurator/) on your smartphone.
-2. **Send a request:** In the settings menu (color/logo change), click **"Write to the author"**.
-3. **Discussion:** In the mail tab that opens, briefly describe your wishes for the 3D model or environment.
+🚀 Як замовити адаптацію?
+Відкрийте Demo та переконайтеся у швидкості роботи.
 
-**I will help turn your idea into an interactive experience that works right in the browser.**
+В меню конфігуратора натисніть "Написати автору".
+
+В листі опишіть:
+
+Який саме товар ви хочете додати в 3D?
+
+На якому сайті плануєте розмістити віджет?
+
+Які функції кастомізації вам потрібні?
+
+Ми обговоримо вартість, терміни та умови ліцензії в особистому листуванні.
+
+🇺🇸 Business Model & Licensing
+This project showcases high-performance 3D for web. While the demo is public, commercial use and customization are subject to the following terms:
+
+1. Customization Services
+Asset Swap: Replace the smartphone with your specific product.
+
+Branding: Custom textures, logos, and UI styles.
+
+Advanced Features: Interactive animations and unique environments.
+
+2. Terms of Use
+License: Custom builds include a license for use on your specific domains/platforms. Redistribution or resale to third parties is prohibited.
+
+Direct Cooperation: No complex platforms or third-party verifications required for the initial stage.
+
+Payment: Direct invoicing with a partial upfront payment to start the customization process.
+
+📬 Get in Touch
+Open the Live Demo and click "Write to the author" in the settings menu to discuss your project.
